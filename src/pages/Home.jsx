@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Bienvenida from "../components/Bienvenida/Bienvenida";
+import Ligas from "./Ligas";
 function Home() {
   const main = useRef(null);
   const [isActive, setIsActive] = useState(false);
@@ -16,12 +17,14 @@ function Home() {
   return (
     <>
       <main ref={main.current} className="w-full min-h-dvh">
-        {!isActive && (
+        {!isActive ? (
           <Bienvenida
             accion="Bienvenido"
             active={activation}
             genere={isFemenine}
           />
+        ) : (
+          <Ligas />
         )}
       </main>
     </>

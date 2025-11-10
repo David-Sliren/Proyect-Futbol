@@ -14,20 +14,15 @@ import { useBotones } from "../context/BotonData";
 gsap.registerPlugin(useGSAP);
 
 function Ligas({ loe }) {
-  // const classi = useClasificacion();
   const { datosDeBotones, botonData } = useBotones();
-  // console.log("botonData: ", botonData);
   const { ligasOrganizadas } = useLigas();
   const { principales, sudamericanas, todas } = useTypeDeliga();
   const [isActive, setIsActive] = useState(false);
   const bienvenida = useRef();
-  // console.log(ligasOrganizadas);
-  // console.log(bienvenida);
   function handleClick(data) {
     datosDeBotones(data);
     loe();
   }
-  // console.log(todas);
 
   useGSAP(() => {
     gsap
@@ -43,70 +38,68 @@ function Ligas({ loe }) {
   }
 
   return (
-    <>
-      <main>
-        <div ref={bienvenida}>
-          {isActive && (
-            <Bienvenida
-              accion="ELije una liga"
-              active={activador}
-              height="fit"
-              text={6}
-              animacion="power1"
-              animationDuration2={0}
-              animationDuration1={0.8}
-            />
-          )}
-        </div>
-        <ElementoP nombre="Ligas">
-          <ElementoLP nombre="Ligas principales" column={5}>
-            {principales.map((item) => {
-              return (
-                <ElementoL
-                  key={item.id}
-                  name={item.liga}
-                  logo={item.logo}
-                  logica={handleClick}
-                  dependencia={item.selecion}
-                  isActive={true}
-                />
-              );
-            })}
-          </ElementoLP>
+    <div className="h-[200vh]">
+      <div ref={bienvenida}>
+        {isActive && (
+          <Bienvenida
+            accion="ELije una liga"
+            active={activador}
+            height="fit"
+            text={6}
+            animacion="power1"
+            animationDuration2={0}
+            animationDuration1={0.8}
+          />
+        )}
+      </div>
+      <ElementoP nombre="Ligas">
+        <ElementoLP nombre="Ligas principales" column={5}>
+          {principales.map((item) => {
+            return (
+              <ElementoL
+                key={item.id}
+                name={item.liga}
+                logo={item.logo}
+                logica={handleClick}
+                dependencia={item.selecion}
+                isActive={true}
+              />
+            );
+          })}
+        </ElementoLP>
 
-          <ElementoLP nombre="Ligas sudamericanas" column={5}>
-            {sudamericanas?.map((item) => {
-              return (
-                <ElementoL
-                  key={item.id}
-                  name={item.liga}
-                  logo={item.logo}
-                  logica={handleClick}
-                  dependencia={item.selecion}
-                  isActive={true}
-                />
-              );
-            })}
-          </ElementoLP>
+        <ElementoLP nombre="Ligas sudamericanas" column={5}>
+          {sudamericanas?.map((item) => {
+            return (
+              <ElementoL
+                key={item.id}
+                name={item.liga}
+                logo={item.logo}
+                logica={handleClick}
+                dependencia={item.selecion}
+                isActive={true}
+              />
+            );
+          })}
+        </ElementoLP>
 
-          <ElementoLP nombre="Todas las ligas" column={3}>
-            {ligasOrganizadas.map((item) => {
-              return (
-                <ElementoL
-                  key={item.id}
-                  name={item.liga}
-                  logo={item.logo}
-                  logica={handleClick}
-                  dependencia={item.liga}
-                  isActive={true}
-                />
-              );
-            })}
-          </ElementoLP>
-        </ElementoP>
-        <h1>hola</h1>
-      </main>
-    </>
+        <ElementoLP nombre="Todas las ligas" column={3}>
+          {ligasOrganizadas.map((item) => {
+            return (
+              <ElementoL
+                key={item.id}
+                name={item.liga}
+                logo={item.logo}
+                logica={handleClick}
+                dependencia={item.liga}
+                isActive={true}
+              />
+            );
+          })}
+        </ElementoLP>
+      </ElementoP>
+      <h1>hola</h1>
+    </div>
   );
 }
 

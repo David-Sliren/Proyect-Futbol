@@ -12,15 +12,10 @@ import ElementoP from "../components/Plantillas/ElementoP";
 
 function Equipos() {
   const { filtrado } = useEquipos();
-  // const { datosDeBotones } = useBotones();
-  // console.log(equipos);
   const { ligasOrganizadas } = useLigas();
   const cls = useTypeClasificacion();
-  // console.log("cls: ", cls);
   const seasonFun = useSeasons();
 
-  // console.log(seasonFun("Cup", 2022));
-  // console.log(botonData);
   return (
     <>
       <ElementoP nombre="Equipos">

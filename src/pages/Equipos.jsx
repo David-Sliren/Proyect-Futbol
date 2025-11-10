@@ -1,17 +1,18 @@
-import ElementoP from "./ligas/ElementoP";
-import ElementoLP from "./ligas/ElementoLp";
-import ElementoL from "./ligas/ElementoL";
-import { useEquipos } from "../../../context/EquiposDeFutbol";
-import { useLigas } from "../../../context/LigasDeFutbol";
+import { useEquipos } from "../context/EquiposDeFutbol";
+import { useLigas } from "../context/LigasDeFutbol";
 import {
   useSeasons,
   useTypeClasificacion,
-} from "../../../context/ClasificacionDeFutbol";
-import { UseBotones } from "../../../context/BotonData";
+} from "../context/ClasificacionDeFutbol";
+
+import { useBotones } from "../context/BotonData";
+import ElementoL from "../components/Plantillas/ElementoL";
+import ElementoLP from "../components/Plantillas/ElementoLp";
+import ElementoP from "../components/Plantillas/ElementoP";
 
 function Equipos() {
   const { filtrado } = useEquipos();
-  const { datosDeBotones } = UseBotones();
+  // const { datosDeBotones } = useBotones();
   // console.log(equipos);
   const { ligasOrganizadas } = useLigas();
   const cls = useTypeClasificacion();

@@ -1,12 +1,19 @@
+import { Routes, Route } from "react-router";
 import { useState } from "react";
-import Home from "./assets/components/Home";
+import Home from "./pages/Home";
+import Equipos from "./pages/Equipos";
+import Ligas from "./pages/Ligas";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <>
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="equipos" element={<Equipos />} />
+        <Route path="ligas" element={<Ligas />} />
+      </Routes>
     </>
   );
 }

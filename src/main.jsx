@@ -6,9 +6,11 @@ import LigasDeFutbol from "./context/LigasDeFutbol.jsx";
 import EquiposDeFutbol from "./context/EquiposDeFutbol.jsx";
 import ClasificacionDeFutbol from "./context/ClasificacionDeFutbol.jsx";
 import BotonData from "./context/BotonData.jsx";
+import {BrowserRouter} from 'react-router';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <BrowserRouter>
     <BotonData>
       <LigasDeFutbol>
         <EquiposDeFutbol>
@@ -18,5 +20,6 @@ createRoot(document.getElementById("root")).render(
         </EquiposDeFutbol>
       </LigasDeFutbol>
     </BotonData>
+    </BrowserRouter>
   </StrictMode>,
 );

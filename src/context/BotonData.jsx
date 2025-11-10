@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
-const ContextBotones = createContext();
+export const ContextBotones = createContext();
 
 function BotonData({ children }) {
   const [botonData, setBotonData] = useState(null);
@@ -32,7 +32,7 @@ function BotonData({ children }) {
 
 export default BotonData;
 
-export function UseBotones() {
+export function useBotones() {
   const context = useContext(ContextBotones);
   const { botonData, setBotonData, registre, isCahe } = context;
   function datosDeBotones(datos) {

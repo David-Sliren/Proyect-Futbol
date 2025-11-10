@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useFetch } from "../assets/components/subComponentes/useFetch";
+import { useFetch } from "../hooks/useFetch";
 
 const contextClasificacion = createContext();
 
@@ -8,7 +8,7 @@ function ClasificacionDeFutbol({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const { datos } = useFetch(
     "https://v3.football.api-sports.io/leagues?current=true",
-    "clasificacionFutbol",
+    "clasificacionFutbol"
   );
 
   const valor = { clasificacion: datos };

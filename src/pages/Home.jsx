@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Bienvenida from "./subComponentes/Bienvenida/Bienvenida";
-import Ligas from "./subComponentes/Ligas";
-import Equipos from "./subComponentes/Equipos";
+import Bienvenida from "../components/Bienvenida/Bienvenida";
 function Home() {
   const main = useRef(null);
   const [isActive, setIsActive] = useState(false);
@@ -18,14 +16,13 @@ function Home() {
   return (
     <>
       <main ref={main.current} className="w-full min-h-dvh">
-        {/* {!isActive && (
+        {!isActive && (
           <Bienvenida
             accion="Bienvenido"
             active={activation}
             genere={isFemenine}
           />
-        )} */}
-        {isLOE ? <Ligas loe={loen} /> : <Equipos />}
+        )}
       </main>
     </>
   );

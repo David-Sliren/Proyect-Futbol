@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import { useLigas, useTypeDeliga } from "../../../context/LigasDeFutbol";
-import ElementoL from "./ligas/ElementoL";
-import ElementoLP from "./ligas/ElementoLp";
-import ElementoP from "./ligas/ElementoP";
-import Bienvenida from "./Bienvenida/Bienvenida";
+import { useLigas, useTypeDeliga } from "../context/LigasDeFutbol";
+import ElementoL from "../components/Plantillas/ElementoL";
+import ElementoLP from "../components/Plantillas/ElementoLp";
+import ElementoP from "../components/Plantillas/ElementoP";
+import Bienvenida from "../components/Bienvenida/Bienvenida";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
   useClasificacion,
   useTypeClasificacion,
-} from "../../../context/ClasificacionDeFutbol";
-import { UseBotones } from "../../../context/BotonData";
+} from "../context/ClasificacionDeFutbol";
+import { useBotones } from "../context/BotonData";
 gsap.registerPlugin(useGSAP);
 
 function Ligas({ loe }) {
   // const classi = useClasificacion();
-  const { datosDeBotones, botonData } = UseBotones();
+  const { datosDeBotones, botonData } = useBotones();
   // console.log("botonData: ", botonData);
   const { ligasOrganizadas } = useLigas();
-  const { principales, sudamericana } = useTypeDeliga();
+  const { principales, sudamericanas, todas } = useTypeDeliga();
   const [isActive, setIsActive] = useState(false);
   const bienvenida = useRef();
   // console.log(ligasOrganizadas);
@@ -27,6 +27,7 @@ function Ligas({ loe }) {
     datosDeBotones(data);
     loe();
   }
+  // console.log(todas);
 
   useGSAP(() => {
     gsap
@@ -74,7 +75,7 @@ function Ligas({ loe }) {
           </ElementoLP>
 
           <ElementoLP nombre="Ligas sudamericanas" column={5}>
-            {sudamericana.map((item) => {
+            {sudamericanas?.map((item) => {
               return (
                 <ElementoL
                   key={item.id}
@@ -88,7 +89,7 @@ function Ligas({ loe }) {
             })}
           </ElementoLP>
 
-          <ElementoLP nombre="Todas las ligas" column={2}>
+          <ElementoLP nombre="Todas las ligas" column={3}>
             {ligasOrganizadas.map((item) => {
               return (
                 <ElementoL
@@ -103,6 +104,7 @@ function Ligas({ loe }) {
             })}
           </ElementoLP>
         </ElementoP>
+        <h1>hola</h1>
       </main>
     </>
   );

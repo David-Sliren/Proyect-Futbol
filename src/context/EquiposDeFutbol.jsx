@@ -7,13 +7,13 @@ import React, {
 } from "react";
 import { useLigas } from "./LigasDeFutbol";
 import { useClasificacion } from "./ClasificacionDeFutbol";
-import { useFetch } from "../assets/components/subComponentes/useFetch";
-import { UseBotones } from "./BotonData";
+import { useFetch } from "../hooks/useFetch";
+import { useBotones } from "./BotonData";
 
 const ContextEquipos = createContext();
 
 function EquiposDeFutbol({ children }) {
-  const { botonData, setBotonData, registre, isCahe } = UseBotones();
+  const { botonData, setBotonData, registre, isCahe } = useBotones();
   console.log(isCahe);
   const url =
     botonData && !isCahe
@@ -22,7 +22,7 @@ function EquiposDeFutbol({ children }) {
 
   const { datos, error, isLoading, controller } = useFetch(
     url,
-    "equiposDeFutbol",
+    "equiposDeFutbol"
   );
 
   const valor = {

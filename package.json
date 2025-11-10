@@ -1,10 +1,10 @@
 {
-  "name": "tp-3",
+  "name": "proyect-futbol",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -15,6 +15,7 @@
     "gsap": "^3.13.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router": "^7.9.5",
     "tailwindcss": "^4.1.13"
   },
   "devDependencies": {

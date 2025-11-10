@@ -161,11 +161,6 @@ export function useTypeDeliga() {
     return datos;
   });
 
-  // const sudame = ligasOrganizadas.filter(
-  //   (item) => item.selecion === "Colombia"
-  // );
-  // console.log("sudame: ", sudame);
-
   return {
     sudamericanas: sudamericana,
     principales: pricipales,

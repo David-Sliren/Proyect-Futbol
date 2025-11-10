@@ -1,11 +1,7 @@
 import { useEquipos } from "../context/EquiposDeFutbol";
 import { useLigas } from "../context/LigasDeFutbol";
-import {
-  useSeasons,
-  useTypeClasificacion,
-} from "../context/ClasificacionDeFutbol";
-
 import { useBotones } from "../context/BotonData";
+
 import ElementoL from "../components/Plantillas/ElementoL";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
@@ -13,8 +9,6 @@ import ElementoP from "../components/Plantillas/ElementoP";
 function Clasificacion() {
   const { filtrado } = useEquipos();
   const { ligasOrganizadas } = useLigas();
-  const cls = useTypeClasificacion();
-  const seasonFun = useSeasons();
 
   return (
     <>

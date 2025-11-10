@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+
 import { useLigas, useTypeDeliga } from "../context/LigasDeFutbol";
 import ElementoL from "../components/Plantillas/ElementoL";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
 import Bienvenida from "../components/Bienvenida/Bienvenida";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import {
-  useClasificacion,
-  useTypeClasificacion,
-} from "../context/ClasificacionDeFutbol";
 import { useBotones } from "../context/BotonData";
 gsap.registerPlugin(useGSAP);
 

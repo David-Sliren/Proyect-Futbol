@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
+import { useBotones } from "../context/BotonData";
+import { useLiga } from "../hooks/contexts/useLiga";
+import { usePriorityLiga } from "../hooks/contexts/usePriorityLiga";
 import { useLigas, useTypeDeliga } from "../context/LigasDeFutbol";
+
 import ElementoL from "../components/Plantillas/ElementoL";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
@@ -8,21 +12,22 @@ import Bienvenida from "../components/Bienvenida/Bienvenida";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useBotones } from "../context/BotonData";
-import { useLiga } from "../hooks/contexts/useLiga";
-import { usePriorityLiga } from "../hooks/contexts/usePriorityLiga";
 gsap.registerPlugin(useGSAP);
 
 function Ligas({ loe }) {
-  // const { datosDeBotones, botonData } = useBotones();
-  const { europeas, sudamericanas } = usePriorityLiga();
+  const { datosDeBotones, botonData } = useBotones();
+  const { europeas, sudamericanas } = usePriorityLiga("League", 2025);
   const { data } = useLiga("League", 2025);
   const [isActive, setIsActive] = useState(false);
   const bienvenida = useRef();
   function handleClick(data) {
-    datosDeBotones(data);
     loe();
   }
+
+  console.log("botonData: " + botonData);
+
+  // console.log(data);
+  // console.log(europeas);
 
   useGSAP(() => {
     gsap
@@ -60,9 +65,9 @@ function Ligas({ loe }) {
                 key={item.id}
                 name={item.name}
                 logo={item.logo}
-                // logica={handleClick}
-                // dependencia={item.selecion}
-                // isActive={true}
+                logica={datosDeBotones}
+                dependencia={item.id}
+                isActive={true}
               />
             );
           })}
@@ -75,9 +80,9 @@ function Ligas({ loe }) {
                 key={item.id}
                 name={item.name}
                 logo={item.logo}
-                // logica={handleClick}
-                // dependencia={item.selecion}
-                // isActive={true}
+                logica={datosDeBotones}
+                dependencia={item.id}
+                isActive={true}
               />
             );
           })}
@@ -90,9 +95,9 @@ function Ligas({ loe }) {
                 key={item.id}
                 name={item.name}
                 logo={item.logo}
-                // logica={handleClick}
-                // dependencia={item.liga}
-                // isActive={true}
+                logica={datosDeBotones}
+                dependencia={item.id}
+                isActive={true}
               />
             );
           })}

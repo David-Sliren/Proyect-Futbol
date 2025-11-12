@@ -104,8 +104,8 @@ const sudamericana = [
   },
 ];
 
-export function usePriorityLiga() {
-  const { data } = useLiga("League", 2025);
+export function usePriorityLiga(type, temporada) {
+  const { data } = useLiga(type, temporada);
   const europeas = principales.map((item) => {
     const datos = data.find((lo) => lo.id === item.id);
     return datos;

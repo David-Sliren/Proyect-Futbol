@@ -36,10 +36,7 @@ export function useFetch(url, localName) {
         }
 
         const data = await res.json();
-        localStorage.setItem(
-          localName,
-          JSON.stringify([...datos, data.response]),
-        );
+        localStorage.setItem(localName, JSON.stringify([...data.response]));
         setDatos(data.response);
       } catch (error) {
         if (error.name === "AbortError") {

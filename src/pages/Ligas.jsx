@@ -14,7 +14,7 @@ import { usePriorityLiga } from "../hooks/contexts/usePriorityLiga";
 gsap.registerPlugin(useGSAP);
 
 function Ligas({ loe }) {
-  const { datosDeBotones, botonData } = useBotones();
+  // const { datosDeBotones, botonData } = useBotones();
   const { europeas, sudamericanas } = usePriorityLiga();
   const { data } = useLiga("League", 2025);
   const [isActive, setIsActive] = useState(false);

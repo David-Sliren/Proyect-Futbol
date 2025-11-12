@@ -13,23 +13,19 @@ import { useBotones } from "./BotonData";
 const ContextEquipos = createContext();
 
 function EquiposDeFutbol({ children }) {
-  const { botonData, setBotonData, registre, isCahe } = useBotones();
-  console.log(isCahe);
-  const url =
-    botonData && !isCahe
-      ? `https://v3.football.api-sports.io/teams?country=${botonData}`
-      : null;
+  const { botonData, setBotonData } = useBotones();
 
-  const { datos, error, isLoading, controller } = useFetch(
-    url,
-    "equiposDeFutbol"
-  );
+  // const url =
+  //   botonData && !isCahe
+  //     ? `https://v3.football.api-sports.io/teams?country=${botonData}`
+  //     : null;
+
+  // const { datos, error, isLoading, controller } = useFetch(
+  //   url,
+  //   "equiposDeFutbol"
+  // );
 
   const valor = {
-    datos,
-    isLoading,
-    error,
-    registre,
     botonData,
     setBotonData,
   };
@@ -43,7 +39,7 @@ export default EquiposDeFutbol;
 export function useEquipos() {
   const contextValue = useContext(ContextEquipos);
   const allEquipos = contextValue.datos;
-  const { botonData, setBotonData } = contextValue;
+  // const { botonData, setBotonData } = contextValue;
   // ..
   // ...
   // ....

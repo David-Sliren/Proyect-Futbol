@@ -1,4 +1,3 @@
-import { useEquipos } from "../context/EquiposDeFutbol";
 import { useLigas } from "../context/LigasDeFutbol";
 import { useBotones } from "../context/BotonData";
 import { useLiga } from "../hooks/contexts/useLiga";
@@ -8,7 +7,6 @@ import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
 
 function Clasificacion() {
-  const { filtrado } = useEquipos();
   const { ligasOrganizadas } = useLigas();
   const { data } = useLiga("League", 2025);
   // console.log(data);
@@ -17,11 +15,6 @@ function Clasificacion() {
       <ElementoP nombre="Clasificacion">
         <ElementoLP nombre="Equipos principales" column={3}>
           {data?.map((item) => {
-            // if (
-            //   item.type == "League" &&
-            //   item.season == 2025 &&
-            //   item.name == "Premier League"
-            // )
             return (
               <ElementoL
                 key={item.id}

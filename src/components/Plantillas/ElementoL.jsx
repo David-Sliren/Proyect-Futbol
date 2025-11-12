@@ -21,7 +21,9 @@ function ElementoL({
         />
       </span>
       <span className=" pointer-events-none">
-        <p className="text-[1.2em] font-semibold">{name}</p>
+        <p className="text-[1.2em] text-center font-semibold">
+          {name.length > 15 ? name.slice(0, 20) + "..." : name}
+        </p>
       </span>
     </li>
   );

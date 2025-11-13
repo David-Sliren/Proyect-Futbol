@@ -5,28 +5,38 @@ import { useLiga } from "../hooks/contexts/useLiga";
 import ElementoL from "../components/Plantillas/ElementoL";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
+import { useState } from "react";
+import Table from "../components/Plantillas/Table";
 
 function Clasificacion() {
   const { ligasOrganizadas } = useLigas();
   const { data } = useLiga("League", 2025);
-  // console.log(data);
+  const [datos, setDatos] = useState(() => {
+    const local = localStorage.getItem("local");
+    return local ? JSON.parse(local) : [];
+  });
+  console.log(datos);
   return (
     <>
-      <ElementoP nombre="Clasificacion">
-        <ElementoLP nombre="Equipos principales" column={3}>
-          {data?.map((item) => {
-            return (
-              <ElementoL
-                key={item.id}
-                name={item.type}
-                logo={item.logo}
-                // id={item.id}
-                // logica={datosDeBotones}
-                // dependencia={item.seleccion}
-                // isActive={true}
-              />
-            );
-          })}
+      <ElementoP nombre={datos[0].league.name}>
+        <ElementoLP nombre="Tabla">
+          <Table>
+            {datos[0].league.standings[0]?.map((item) => {
+              return (
+                <tr className="border-2 border-t-0 text-center">
+                  <td>{item.team.name}</td>
+                  <td>{item.all.played}</td>
+                  <td>{item.all.win}</td>
+                  <td>{item.all.draw}</td>
+                  <td>{item.all.lose}</td>
+                  <td>{item.all.goals.for}</td>
+                  <td>{item.all.goals.against}</td>
+                  <td>{item.all.goals.for - item.all.goals.against}</td>
+                  <td>{item.points}</td>
+                </tr>
+              );
+            })}
+          </Table>
         </ElementoLP>
       </ElementoP>
     </>

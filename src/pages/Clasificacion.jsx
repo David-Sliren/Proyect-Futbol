@@ -6,7 +6,7 @@ import ElementoL from "../components/Plantillas/ElementoL";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
 import { useState } from "react";
-import Table from "../components/Plantillas/Table";
+import Table from "../components/Plantillas/Table/Table";
 
 function Clasificacion() {
   const { ligasOrganizadas } = useLigas();
@@ -23,8 +23,8 @@ function Clasificacion() {
           <Table>
             {datos[0].league.standings[0]?.map((item) => {
               return (
-                <tr key={item.rank} className="border-2 border-t-0 text-center">
-                  <td>{item.team.name}</td>
+                <tr key={item.rank}>
+                  <td className="font-semibold">{item.team.name}</td>
                   <td>{item.all.played}</td>
                   <td>{item.all.win}</td>
                   <td>{item.all.draw}</td>
@@ -32,7 +32,7 @@ function Clasificacion() {
                   <td>{item.all.goals.for}</td>
                   <td>{item.all.goals.against}</td>
                   <td>{item.all.goals.for - item.all.goals.against}</td>
-                  <td>{item.points}</td>
+                  <td className="font-semibold">{item.points}</td>
                 </tr>
               );
             })}

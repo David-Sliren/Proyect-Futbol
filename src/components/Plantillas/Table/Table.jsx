@@ -2,9 +2,9 @@ import React from "react";
 
 function Table({ children }) {
   return (
-    <table className="border-2 ">
+    <table className=" table-base ">
       <thead>
-        <tr className="border-2 border-t-0">
+        <tr>
           <th>Cub</th>
           <th>PJ</th>
           <th>G</th>

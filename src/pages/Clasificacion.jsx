@@ -23,7 +23,7 @@ function Clasificacion() {
           <Table>
             {datos[0].league.standings[0]?.map((item) => {
               return (
-                <tr className="border-2 border-t-0 text-center">
+                <tr key={item.rank} className="border-2 border-t-0 text-center">
                   <td>{item.team.name}</td>
                   <td>{item.all.played}</td>
                   <td>{item.all.win}</td>

@@ -7,6 +7,7 @@ import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
 import { useState } from "react";
 import Table from "../components/Plantillas/Table/Table";
+import { useEventsToday } from "../hooks/contexts/useEvents";
 
 function Clasificacion() {
   const { ligasOrganizadas } = useLigas();
@@ -15,7 +16,9 @@ function Clasificacion() {
     const local = localStorage.getItem("local");
     return local ? JSON.parse(local) : [];
   });
-  console.log(datos);
+
+  const { datos: eventsToday } = useEventsToday();
+  console.log(eventsToday);
   return (
     <>
       <ElementoP nombre={datos[0].league.name}>

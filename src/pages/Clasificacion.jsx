@@ -6,8 +6,9 @@ import ElementoL from "../components/Plantillas/ElementoL";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
 import { useState } from "react";
-import Table from "../components/Plantillas/Table/Table";
+import Table from "../components/Table/Table";
 import { useEventsToday } from "../hooks/contexts/useEvents";
+import Events from "../components/Events/Events";
 
 function Clasificacion() {
   const { ligasOrganizadas } = useLigas();
@@ -17,8 +18,8 @@ function Clasificacion() {
     return local ? JSON.parse(local) : [];
   });
 
-  const { datos: eventsToday } = useEventsToday();
-  console.log(eventsToday);
+  const { datos: eventslive } = useEventsToday();
+  console.log(eventslive);
   return (
     <>
       <ElementoP nombre={datos[0].league.name}>
@@ -40,6 +41,17 @@ function Clasificacion() {
               );
             })}
           </Table>
+        </ElementoLP>
+        <ElementoLP nombre="Eventos en vivo" column={4}>
+          {eventslive.map((item, index) => {
+            return (
+              <Events
+                img1={item.teams.home.logo}
+                text={` ${item.goals.home} - ${item.goals.away}`}
+                img2={item.teams.away.logo}
+              />
+            );
+          })}
         </ElementoLP>
       </ElementoP>
     </>

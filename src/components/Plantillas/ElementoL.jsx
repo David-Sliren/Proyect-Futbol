@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 function ElementoL({
   id = 1,
@@ -9,7 +10,8 @@ function ElementoL({
   isActive = false,
 }) {
   return (
-    <li
+    <Link
+      to="/clasificacion"
       className="h-28 bg-black/20 gap-1 text-[1em] text-white rounded-2xl border-2 border-black py-2 px-1.5 flex flex-col justify-center items-center backdrop-blur-3xl transition-transform duration-400 ease-in-out cursor-pointer hover:scale-98 group shadow-md shadow-zinc-800 overflow-hidden"
       onClick={isActive && dependencia ? () => logica(dependencia) : null}
     >
@@ -25,7 +27,7 @@ function ElementoL({
           {name.length > 15 ? name.slice(0, 20) + "..." : name}
         </p>
       </span>
-    </li>
+    </Link>
   );
 }
 

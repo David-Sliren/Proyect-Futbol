@@ -7,6 +7,7 @@ function ElementoLP({
   nombre = "",
   height = "fit",
   children,
+  scroll = true,
 }) {
   const columnas = {
     2: `grid-cols-2`,
@@ -29,7 +30,7 @@ function ElementoLP({
         {nombre}
       </h2>
       <ul
-        className={`${columnas[column]} scrollbar-hidden p-1 grid  gap-4 w-full max-h-[600px] overflow-x-hidden scroll-hidden scroll-none transform-3d perspective-near`}
+        className={`${columnas[column]} scrollbar-hidden p-1 grid  gap-4 w-full ${scroll ? "max-h-[600px]" : "max-h-fit"} overflow-x-hidden scroll-hidden scroll-none transform-3d perspective-near`}
       >
         {children}
       </ul>

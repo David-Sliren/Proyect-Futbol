@@ -4,10 +4,10 @@ import ElementoP from "../components/Plantillas/ElementoP";
 import Table from "../components/Table/Table";
 
 import Events from "../components/Events/Events";
-import { useFutbolQuery } from "../hooks/useFutbolQuery";
+// import { useFutbolQuery } from "../hooks/useFutbolQuery";
 
 function Clasificacion() {
-  const { match } = useFutbolQuery();
+  // const { match } = useFutbolQuery();
 
   return (
     <>
@@ -32,7 +32,7 @@ function Clasificacion() {
           </Table> */}
         </ElementoLP>
         <ElementoLP nombre="Eventos en vivo" column={3}>
-          {match.data?.map((item) => {
+          {/* {match.data?.map((item) => {
             return (
               <Events
                 // key={item.competition.id}
@@ -43,7 +43,7 @@ function Clasificacion() {
                 // alt2={item.awayTeam.name}
               />
             );
-          })}
+          })} */}
         </ElementoLP>
       </ElementoP>
     </>

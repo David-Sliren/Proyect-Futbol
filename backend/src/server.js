@@ -1,6 +1,3 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -12,12 +9,13 @@ import { fetchCompetitions } from "./services/cometitionsServices.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const Root = path.resolve();
 
 const ligaConfig = {
   bigfive: bigFive,
   sudamerican: sudamerican,
 };
+
+const typeCompetition = ["LEAGUE", "CUP"];
 
 app.use(cors());
 app.use(morgan("dev")); // Logger de peticiones
@@ -31,44 +29,33 @@ app.get("/api/competitions/:type", async (req, res) => {
   const { type } = req.params;
   const { priority } = req.query;
 
-  console.log(type);
-
-  const typeCompetiton = ["LEAGUE", "CUP"];
-
-  const competitonConfig = {
-    bigfive: bigFive,
-    sudamerican: sudamerican,
-  };
-
-  if (!typeCompetiton.includes(type)) {
+  if (!typeCompetition.includes(type)) {
     return res.status(400).json({
-      error: "Error Tipo de competicion no valida elija bigfive o sudamerican",
+      error: `Error Tipo de competicion no valida elija ${typeCompetiton[0]} o ${typeCompetiton[1]}`,
+      error: `Error Tipo de competicion no valida elija ${typeCompetition[0]} o ${typeCompetition[1]}`,
     });
   }
 
   try {
     const data = await fetchCompetitions();
 
-    const filter = data.filter((t) => t.type === type);
+    const filterType = data
+      .filter((t) => t.type === type)
+      .map((L) => ({ id: L.id, name: L.name, logo: L.emblem, type: L.type }));
 
-    // if (priority && typeCompetiton.includes(type)) {
-    //   if (type === typeCompetiton[0]) {
-    //     const filter = data.map((t) => {
-    //       if (competitonConfig[priority]) {
-    //         return { id: t.id, name: t.name, logo: t.emblem };
-    //       }
-    //     });
-    //     return res.json(filter);
-    //   }
+    if (priority && typeCompetition.includes(type)) {
+      if (type === typeCompetition[1]) {
+        const filter = data.filter((t) => t.type === type);
+        return res.json(filter);
+      }
 
-    //   if (type === typeCompetiton[1]) {
-    //     const filter = data.filter((t) => t.type === type);
-    //     return res.json(filter);
-    //   }
-    //   return;
-    // }
+      const liga = filterType.filter((L) =>
+        ligaConfig[priority]?.includes(L.id),
+      );
+      return res.json(liga);
+    }
 
-    res.json(filter);
+    res.json(filterType);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al obtener datos de fútbol" });

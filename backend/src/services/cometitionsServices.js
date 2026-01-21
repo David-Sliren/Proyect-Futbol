@@ -7,3 +7,11 @@ export async function fetchCompetitions() {
 
   return data.competitions;
 }
+
+export async function fetchCompetitionsId(id) {
+  const data = await fetchPrincipal({
+    url: `https://api.football-data.org/v4/competitions/${id}/standings`,
+  });
+
+  return data.standings;
+}

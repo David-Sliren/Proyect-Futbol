@@ -4,8 +4,15 @@ import cors from "cors";
 import "dotenv/config"; // Carga las variables de entorno automáticamente
 
 import { bigFive, sudamerican } from "./constants/typeLegue.js";
-import { fetchMatches } from "./services/matchesServices.js";
-import { fetchCompetitions } from "./services/cometitionsServices.js";
+import {
+  fetchMatches as q,
+  matchesCompetition,
+  fetchMatches,
+} from "./services/matchesServices.js";
+import {
+  fetchCompetitions,
+  fetchCompetitionsId,
+} from "./services/cometitionsServices.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,7 +38,6 @@ app.get("/api/competitions/:type", async (req, res) => {
 
   if (!typeCompetition.includes(type)) {
     return res.status(400).json({
-      error: `Error Tipo de competicion no valida elija ${typeCompetiton[0]} o ${typeCompetiton[1]}`,
       error: `Error Tipo de competicion no valida elija ${typeCompetition[0]} o ${typeCompetition[1]}`,
     });
   }
@@ -62,41 +68,42 @@ app.get("/api/competitions/:type", async (req, res) => {
   }
 });
 
+app.get("/api/competitions/:id/table", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const data = await fetchCompetitionsId(id);
+    if (data.length === 0) {
+      return res.json([]);
+    }
+    const filterTable = data[0].table;
+    res.json(filterTable);
+  } catch (e) {
+    res.status(500).json({ error: "Error al obtener datos de futbol" });
+  }
+});
+
 app.get("/api/matches", async (req, res) => {
-  try {
-    const data = await fetchMatches();
-    res.json(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener datos de fútbol" });
-  }
-});
-
-app.get("/api/matches/:type", async (req, res) => {
-  const { type } = req.params;
-
-  if (!ligaConfig[type]) {
-    return res
-      .status(400)
-      .json({ error: "Tipo de liga no válido. Use 'bigfive' o 'sudamerican'" });
-  }
+  const { competitions } = req.query;
 
   try {
-    const data = await fetchMatches();
+    const data = await (competitions
+      ? matchesCompetition(competitions)
+      : fetchMatches());
 
-    const filter = data.filter(
-      (match) =>
-        match?.competition && ligaConfig[type].includes(match.competition?.id),
-    );
-    res.json(filter);
+    if (data.length === 0) return res.json([]);
+    const filterMatch = data?.map((m) => ({
+      startGame: m.utcDate,
+      statusGame: m.status,
+      competition: m.competition,
+      localTeam: m.homeTeam,
+      visitTeam: m.awayTeam,
+      score: m.score.fullTime,
+    }));
+    res.json(filterMatch);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "Error al obtener datos de fútbol" });
   }
-});
-
-app.get("/about", (req, res) => {
-  res.send("About Project Futbol");
 });
 
 // Iniciar servidor

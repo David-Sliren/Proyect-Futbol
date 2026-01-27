@@ -1,6 +1,16 @@
 @import "tailwindcss";
 body {
-  background-color: #242424;
+  /* background-color: #242424; */
+  width: 100%;
+  height: 100%;
+  background-color: #111111;
+  background-image: linear-gradient(
+    32deg,
+    rgba(8, 8, 8, 0.74) 30px,
+    transparent
+  );
+  background-size: 60px 60px;
+  background-position: -5px -5px;
 }
 
 .scrollbar-hidden {
@@ -12,47 +22,13 @@ body {
   display: none;
 }
 
-.table-base tr {
-  @apply border-2;
-}
-
-.table-base td,
-th {
-  @apply border-2 p-2 border-zinc-900 text-gray-600;
-}
-
 .table-base th {
-  @apply text-2xl font-semibold bg-zinc-600 text-white;
+  @apply text-lg font-bold p-2 bg-green-600 backdrop-blur-xl text-white;
 }
 
 .table-base td {
-  @apply text-xl text-center bg-zinc-200;
+  @apply text-lg text-center font-light text-white p-4 backdrop-blur-xl bg-white/10;
 }
-
-/* .diseñoL{
-    position: absolute;
-    content: '';
-    background-color: aqua;
-  } */
-
-/* .diseñoL::before{
-    position: absolute;
-    top: -4%;
-    right: 0;
-    content: '';
-    width: 100%;
-    height: 0;
-    z-index: -1;
-    background-color: rgb(0, 0, 0, .2);
-    border-bottom: 2px solid white;
-    border-radius: 0 0 0 0;
-    transition: .4s ease-in-out;
-  }
-
-  .diseñoL:hover::before {
-    background-color: transparent;
-    height: 155px;
-    } */
 
 @keyframes rebote {
   0%,

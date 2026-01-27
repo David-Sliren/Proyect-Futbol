@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { useGetBotonData } from "../../context/boton_data/useGetBotonData";
 
-function ElementoL({ id = "", name = "liga", logo = "img", isActive = false }) {
+function Card({ id = "", name = "liga", logo = "img", isActive = false }) {
   const { getData } = useGetBotonData();
 
   return (
@@ -28,4 +28,4 @@ function ElementoL({ id = "", name = "liga", logo = "img", isActive = false }) {
   );
 }
 
-export default ElementoL;
+export default Card;

@@ -2,7 +2,7 @@
 
 import { useCompetitionQuery } from "../hooks/useCompetitionQuery";
 
-import ElementoL from "../components/Plantillas/ElementoL";
+import Card from "../components/Plantillas/Card";
 import ElementoLP from "../components/Plantillas/ElementoLp";
 import ElementoP from "../components/Plantillas/ElementoP";
 
@@ -12,10 +12,10 @@ function Home() {
   return (
     <div className="w-full min-h-dvh">
       <ElementoP nombre="FUTBOL MANIA">
-        <ElementoLP nombre="Ligas principales" column={5}>
+        <ElementoLP nombre="Cinco Grandes">
           {priorityBigfive.data?.map((item) => {
             return (
-              <ElementoL
+              <Card
                 key={item.id}
                 id={item.id}
                 name={item.name}
@@ -26,10 +26,10 @@ function Home() {
           })}
         </ElementoLP>
 
-        <ElementoLP nombre="Ligas sudamericanas" column={5}>
+        <ElementoLP nombre="Sudamericanas">
           {prioritySudamerican.data?.map((item) => {
             return (
-              <ElementoL
+              <Card
                 key={item.id}
                 id={item.id}
                 name={item.name}
@@ -40,30 +40,29 @@ function Home() {
           })}
         </ElementoLP>
 
-        <ElementoLP nombre="Todas las ligas" column={3}>
-          {typeLeague.data?.map((item) => {
-            return (
-              <ElementoL
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                logo={item.logo}
-                isActive={true}
-              />
-            );
-          })}
-        </ElementoLP>
-
-        <ElementoLP nombre="Todas las Copas" column={3}>
+        <ElementoLP nombre="Torneos">
           {typeCup.data?.map((item) => {
             return (
-              <ElementoL
+              <Card
                 key={item.id}
+                id={item.id}
                 name={item.name}
                 logo={item.logo}
-                // logica={datosDeBotones}
-                dependencia={item.id}
-                isActive={false}
+                isActive={true}
+              />
+            );
+          })}
+        </ElementoLP>
+
+        <ElementoLP nombre="Todas las ligas">
+          {typeLeague.data?.map((item) => {
+            return (
+              <Card
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                logo={item.logo}
+                isActive={true}
               />
             );
           })}

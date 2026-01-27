@@ -2,9 +2,10 @@ import React from "react";
 
 function Table({ children }) {
   return (
-    <table className=" table-base ">
+    <table className=" table-base w-full shadow-md">
       <thead>
         <tr>
+          <th>Po</th>
           <th>Cub</th>
           <th>PJ</th>
           <th>G</th>

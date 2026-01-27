@@ -49,12 +49,8 @@ app.get("/api/competitions/:type", async (req, res) => {
       .filter((t) => t.type === type)
       .map((L) => ({ id: L.id, name: L.name, logo: L.emblem, type: L.type }));
 
-    if (priority && typeCompetition.includes(type)) {
-      if (type === typeCompetition[1]) {
-        const filter = data.filter((t) => t.type === type);
-        return res.json(filter);
-      }
-
+    // filtras las 5 grade ligas y las ligas sudamericanas
+    if (priority) {
       const liga = filterType.filter((L) =>
         ligaConfig[priority]?.includes(L.id),
       );

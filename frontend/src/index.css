@@ -1,15 +1,14 @@
 @import "tailwindcss";
+
 body {
-  /* background-color: #242424; */
+  background-color: #444;
+}
+.container {
   width: 100%;
   height: 100%;
   background-color: #111111;
-  background-image: linear-gradient(
-    32deg,
-    rgba(8, 8, 8, 0.74) 30px,
-    transparent
-  );
-  background-size: 60px 60px;
+  background-image: linear-gradient(32deg, green 30px, transparent);
+  background-size: 40px 40px;
   background-position: -5px -5px;
 }
 

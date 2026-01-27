@@ -10,7 +10,7 @@ function Home() {
   const { typeLeague, typeCup, priorityBigfive, prioritySudamerican } =
     useCompetitionQuery();
   return (
-    <div className="w-full min-h-dvh">
+    <div className="container w-full min-h-dvh">
       <ElementoP nombre="FUTBOL MANIA">
         <ElementoLP nombre="Cinco Grandes">
           {priorityBigfive.data?.map((item) => {

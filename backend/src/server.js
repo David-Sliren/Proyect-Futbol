@@ -86,13 +86,8 @@ app.get("/api/competitions/:id/table", async (req, res) => {
 app.get("/api/matches", async (req, res) => {
   const { competitions } = req.query;
 
-  try {
-    const data = await (competitions
-      ? matchesCompetition(competitions)
-      : fetchMatches());
-
-    if (data.length === 0) return res.json([]);
-    const filterMatch = data?.map((m) => ({
+  function filterMatch(e) {
+    const data = e?.map((m) => ({
       startGame: m.utcDate,
       statusGame: m.status,
       competition: m.competition,
@@ -100,7 +95,20 @@ app.get("/api/matches", async (req, res) => {
       visitTeam: m.awayTeam,
       score: m.score.fullTime,
     }));
-    res.json(filterMatch);
+
+    return data;
+  }
+
+  try {
+    if (competitions) {
+      const data = await matchesCompetition(competitions);
+      if (data.length === 0)
+        return res.json([{ warnin: "There are no games in play" }]);
+      res.json(filterMatch(data));
+    }
+
+    const data = await fetchMatches();
+    res.json(filterMatch(data));
   } catch (error) {
     res.status(500).json({ error: "Error al obtener datos de fútbol" });
   }

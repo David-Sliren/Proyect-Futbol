@@ -22,7 +22,7 @@ function Clasificacion() {
           </Link>
         </header>
         <ElementoP>
-          <ElementoLP nombre="Eventos en vivo" classNames=" xl:grid-cols-3">
+          <ElementoLP nombre="Eventos en vivo">
             {competitionsMatches.data?.map((item) => {
               return (
                 <Events

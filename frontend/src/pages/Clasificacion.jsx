@@ -6,6 +6,8 @@ import Table from "../components/Plantillas/Table";
 import Events from "../components/Events/Events";
 import { useCompetitionTable } from "../hooks/useCompetitionQuery";
 import { useCompetitionMatches } from "../hooks/useMatchesQuery";
+import { Link } from "react-router";
+import Button from "../components/Plantillas/Button";
 
 function Clasificacion() {
   const { competitionsMatches } = useCompetitionMatches();
@@ -14,7 +16,12 @@ function Clasificacion() {
   return (
     <>
       <div className="container">
-        <ElementoP nombre="Clasificacion">
+        <header className="bg-white/10 w-full h-fit p-2 backdrop-blur-md sticky top-0 z-999">
+          <Link to="/">
+            <Button />
+          </Link>
+        </header>
+        <ElementoP>
           <ElementoLP nombre="Eventos en vivo" classNames=" xl:grid-cols-3">
             {competitionsMatches.data?.map((item) => {
               return (

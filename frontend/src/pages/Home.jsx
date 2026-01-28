@@ -11,7 +11,7 @@ function Home() {
     useCompetitionQuery();
   return (
     <div className="container w-full min-h-dvh">
-      <ElementoP nombre="FUTBOL MANIA">
+      <ElementoP title="FUTBOL MANIA">
         <ElementoLP nombre="Cinco Grandes">
           {priorityBigfive.data?.map((item) => {
             return (

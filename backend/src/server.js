@@ -22,6 +22,12 @@ const ligaConfig = {
   sudamerican: sudamerican,
 };
 
+const cacheTypeCompetitions = {
+  LEAGUE: { data: null, lastTime: 0 },
+  CUP: { data: null, lastTime: 0 },
+  duration: 60 * 1000,
+};
+
 const typeCompetition = ["LEAGUE", "CUP"];
 
 app.use(cors());
@@ -36,6 +42,13 @@ app.get("/api/competitions/:type", async (req, res) => {
   const { type } = req.params;
   const { priority } = req.query;
 
+  // Para aceder a los los tipos de params en el cache
+  const currentCompetitions = cacheTypeCompetitions[type];
+
+  // Tiempo para calcular el guardado en cahe
+  const NOW = Date.now();
+  const LAST_TIME = NOW - cacheTypeCompetitions.lastTime;
+
   if (!typeCompetition.includes(type)) {
     return res.status(400).json({
       error: `Error Tipo de competicion no valida elija ${typeCompetition[0]} o ${typeCompetition[1]}`,
@@ -43,21 +56,27 @@ app.get("/api/competitions/:type", async (req, res) => {
   }
 
   try {
-    const data = await fetchCompetitions();
+    if (
+      !currentCompetitions.data ||
+      LAST_TIME > cacheTypeCompetitions.duration
+    ) {
+      const fecthData = await fetchCompetitions();
+      const filterType = fecthData
+        .filter((t) => t.type === type)
+        .map((L) => ({ id: L.id, name: L.name, logo: L.emblem, type: L.type }));
+      currentCompetitions.data = filterType;
+      currentCompetitions.lastTime = NOW;
+    }
 
-    const filterType = data
-      .filter((t) => t.type === type)
-      .map((L) => ({ id: L.id, name: L.name, logo: L.emblem, type: L.type }));
+    const data = currentCompetitions.data;
 
     // filtras las 5 grade ligas y las ligas sudamericanas
     if (priority) {
-      const liga = filterType.filter((L) =>
-        ligaConfig[priority]?.includes(L.id),
-      );
+      const liga = data.filter((L) => ligaConfig[priority]?.includes(L.id));
       return res.json(liga);
     }
 
-    res.json(filterType);
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al obtener datos de fútbol" });
